@@ -1,5 +1,15 @@
-// Source - https://stackoverflow.com/a/75904914
-// Posted by JoyShaheb
-// Retrieved 2026-04-26, License - CC BY-SA 4.0
-
-{ "rewrites": [{ "source": "/(.*)", "destination": "/" }] }
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "server.js"
+    }
+  ]
+}
