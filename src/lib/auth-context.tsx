@@ -2,15 +2,17 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import type { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 
-export type AppRole = "admin" | "coach" | "student";
+export type AppRole = "admin" | "user";
 
 interface AuthCtx {
   user: User | null;
   session: Session | null;
   role: AppRole | null;
+  isAdmin: boolean;
+  mySportIds: string[];
   loading: boolean;
   signOut: () => Promise<void>;
-  refreshRole: () => Promise<void>;
+  refresh: () => Promise<void>;
 }
 
 const Ctx = createContext<AuthCtx | undefined>(undefined);
@@ -19,39 +21,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [role, setRole] = useState<AppRole | null>(null);
+  const [mySportIds, setMySportIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchRole = async (uid: string) => {
-    const { data } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", uid);
-    if (!data || data.length === 0) {
-      setRole(null);
-      return;
-    }
-    const order: AppRole[] = ["admin", "coach", "student"];
-    const best = order.find((r) => data.some((d) => d.role === r));
-    setRole(best ?? "student");
+  const fetchAux = async (uid: string) => {
+    const [{ data: rolesData }, { data: memberData }] = await Promise.all([
+      supabase.from("user_roles").select("role").eq("user_id", uid),
+      supabase.from("sport_members").select("sport_id").eq("user_id", uid),
+    ]);
+    const isAdmin = (rolesData ?? []).some((r) => r.role === "admin");
+    setRole(isAdmin ? "admin" : "user");
+    setMySportIds((memberData ?? []).map((m: { sport_id: string }) => m.sport_id));
   };
 
   useEffect(() => {
-    // 1. Subscribe FIRST
     const { data: sub } = supabase.auth.onAuthStateChange((_e, sess) => {
       setSession(sess);
       setUser(sess?.user ?? null);
       if (sess?.user) {
-        // defer to avoid deadlock
-        setTimeout(() => fetchRole(sess.user.id), 0);
+        setTimeout(() => fetchAux(sess.user.id), 0);
       } else {
         setRole(null);
+        setMySportIds([]);
       }
     });
-    // 2. Then check existing
     supabase.auth.getSession().then(({ data: { session: sess } }) => {
       setSession(sess);
       setUser(sess?.user ?? null);
-      if (sess?.user) fetchRole(sess.user.id).finally(() => setLoading(false));
+      if (sess?.user) fetchAux(sess.user.id).finally(() => setLoading(false));
       else setLoading(false);
     });
     return () => sub.subscription.unsubscribe();
@@ -60,14 +57,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const signOut = async () => {
     await supabase.auth.signOut();
     setRole(null);
+    setMySportIds([]);
   };
 
-  const refreshRole = async () => {
-    if (user) await fetchRole(user.id);
+  const refresh = async () => {
+    if (user) await fetchAux(user.id);
   };
 
   return (
-    <Ctx.Provider value={{ user, session, role, loading, signOut, refreshRole }}>
+    <Ctx.Provider
+      value={{
+        user,
+        session,
+        role,
+        isAdmin: role === "admin",
+        mySportIds,
+        loading,
+        signOut,
+        refresh,
+      }}
+    >
       {children}
     </Ctx.Provider>
   );
