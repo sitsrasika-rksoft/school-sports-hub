@@ -2,7 +2,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
-import { Trophy, Users, CalendarDays, Megaphone, ArrowRight } from "lucide-react";
+import { Trophy, Users, CalendarDays, ListChecks, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -51,17 +51,17 @@ function Landing() {
             Built for school sports committees
           </div>
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
-            Run your school's
+            Run your college's
             <span
               className="block bg-clip-text text-transparent"
               style={{ backgroundImage: "var(--gradient-hero)" }}
             >
-              sports program
+              sports society
             </span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            One place for athletes, teams, fixtures and announcements. Coaches and admins manage,
-            students stay in the loop.
+            Manage every sport — its vision, mission, tasks, events, members and progress —
+            from one role-based hub.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <Link to="/signup">
@@ -80,10 +80,10 @@ function Landing() {
       <section className="max-w-7xl mx-auto px-6 pb-24">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { icon: Users, title: "Athletes", desc: "Track every student in the program." },
-            { icon: Trophy, title: "Teams", desc: "Roster management with logos." },
-            { icon: CalendarDays, title: "Events", desc: "Fixtures, practices, RSVPs." },
-            { icon: Megaphone, title: "Announcements", desc: "Reach the whole committee." },
+            { icon: Trophy, title: "17 Sports", desc: "Each with vision, mission, members." },
+            { icon: ListChecks, title: "Tasks", desc: "Plan and track work to done." },
+            { icon: CalendarDays, title: "Events", desc: "Schedule fixtures and practices." },
+            { icon: Users, title: "Roles", desc: "Admin, sport leads and members." },
           ].map((f) => (
             <div
               key={f.title}
