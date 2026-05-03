@@ -14,109 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      announcements: {
-        Row: {
-          author_id: string | null
-          body: string
-          created_at: string
-          id: string
-          title: string
-        }
-        Insert: {
-          author_id?: string | null
-          body: string
-          created_at?: string
-          id?: string
-          title: string
-        }
-        Update: {
-          author_id?: string | null
-          body?: string
-          created_at?: string
-          id?: string
-          title?: string
-        }
-        Relationships: []
-      }
-      event_rsvps: {
-        Row: {
-          created_at: string
-          event_id: string
-          id: string
-          status: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          event_id: string
-          id?: string
-          status?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          event_id?: string
-          id?: string
-          status?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "event_rsvps_event_id_fkey"
-            columns: ["event_id"]
-            isOneToOne: false
-            referencedRelation: "events"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      events: {
-        Row: {
-          cover_url: string | null
-          created_at: string
-          created_by: string | null
-          description: string | null
-          ends_at: string | null
-          id: string
-          location: string | null
-          starts_at: string
-          team_id: string | null
-          title: string
-        }
-        Insert: {
-          cover_url?: string | null
-          created_at?: string
-          created_by?: string | null
-          description?: string | null
-          ends_at?: string | null
-          id?: string
-          location?: string | null
-          starts_at: string
-          team_id?: string | null
-          title: string
-        }
-        Update: {
-          cover_url?: string | null
-          created_at?: string
-          created_by?: string | null
-          description?: string | null
-          ends_at?: string | null
-          id?: string
-          location?: string | null
-          starts_at?: string
-          team_id?: string | null
-          title?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "events_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "teams"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -138,107 +35,205 @@ export type Database = {
         }
         Relationships: []
       }
-      students: {
+      progress_reports: {
         Row: {
           created_at: string
           created_by: string | null
-          email: string | null
-          full_name: string
-          grade: string
           id: string
-          notes: string | null
-          phone: string | null
+          metrics: Json
+          period: string
+          sport_id: string
+          summary: string | null
         }
         Insert: {
           created_at?: string
           created_by?: string | null
-          email?: string | null
-          full_name: string
-          grade: string
           id?: string
-          notes?: string | null
-          phone?: string | null
+          metrics?: Json
+          period: string
+          sport_id: string
+          summary?: string | null
         }
         Update: {
           created_at?: string
           created_by?: string | null
-          email?: string | null
-          full_name?: string
-          grade?: string
           id?: string
-          notes?: string | null
-          phone?: string | null
-        }
-        Relationships: []
-      }
-      team_members: {
-        Row: {
-          created_at: string
-          id: string
-          position: string | null
-          student_id: string
-          team_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          position?: string | null
-          student_id: string
-          team_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          position?: string | null
-          student_id?: string
-          team_id?: string
+          metrics?: Json
+          period?: string
+          sport_id?: string
+          summary?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "team_members_student_id_fkey"
-            columns: ["student_id"]
+            foreignKeyName: "progress_reports_sport_id_fkey"
+            columns: ["sport_id"]
             isOneToOne: false
-            referencedRelation: "students"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "team_members_team_id_fkey"
-            columns: ["team_id"]
-            isOneToOne: false
-            referencedRelation: "teams"
+            referencedRelation: "sports"
             referencedColumns: ["id"]
           },
         ]
       }
-      teams: {
+      sport_events: {
         Row: {
-          coach_id: string | null
+          cover_url: string | null
           created_at: string
+          created_by: string | null
           description: string | null
+          ends_at: string | null
           id: string
-          logo_url: string | null
-          name: string
-          sport: string
+          location: string | null
+          sport_id: string
+          starts_at: string
+          title: string
         }
         Insert: {
-          coach_id?: string | null
+          cover_url?: string | null
           created_at?: string
+          created_by?: string | null
           description?: string | null
+          ends_at?: string | null
           id?: string
-          logo_url?: string | null
-          name: string
-          sport: string
+          location?: string | null
+          sport_id: string
+          starts_at: string
+          title: string
         }
         Update: {
-          coach_id?: string | null
+          cover_url?: string | null
           created_at?: string
+          created_by?: string | null
+          description?: string | null
+          ends_at?: string | null
+          id?: string
+          location?: string | null
+          sport_id?: string
+          starts_at?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sport_events_sport_id_fkey"
+            columns: ["sport_id"]
+            isOneToOne: false
+            referencedRelation: "sports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sport_members: {
+        Row: {
+          created_at: string
+          id: string
+          role: string
+          sport_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: string
+          sport_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: string
+          sport_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sport_members_sport_id_fkey"
+            columns: ["sport_id"]
+            isOneToOne: false
+            referencedRelation: "sports"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sports: {
+        Row: {
+          cover_url: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          mission: string | null
+          name: string
+          updated_at: string
+          vision: string | null
+        }
+        Insert: {
+          cover_url?: string | null
+          created_at?: string
+          created_by?: string | null
           description?: string | null
           id?: string
-          logo_url?: string | null
+          mission?: string | null
+          name: string
+          updated_at?: string
+          vision?: string | null
+        }
+        Update: {
+          cover_url?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          mission?: string | null
           name?: string
-          sport?: string
+          updated_at?: string
+          vision?: string | null
         }
         Relationships: []
+      }
+      tasks: {
+        Row: {
+          assignee_id: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          due_date: string | null
+          id: string
+          sport_id: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          assignee_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          sport_id: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          assignee_id?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          sport_id?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tasks_sport_id_fkey"
+            columns: ["sport_id"]
+            isOneToOne: false
+            referencedRelation: "sports"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
@@ -275,6 +270,14 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      is_sport_lead: {
+        Args: { _sport_id: string; _user_id: string }
+        Returns: boolean
+      }
+      is_sport_member: {
+        Args: { _sport_id: string; _user_id: string }
         Returns: boolean
       }
     }
