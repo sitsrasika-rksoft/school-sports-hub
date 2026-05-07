@@ -1,0 +1,156 @@
+export const translations = {
+  en: {
+    brand: "Sports Committee Hub",
+    title: "Old Pupils Association of Bandaranayake College Gampaha",
+    subtitle: "Sports Committee Hub",
+    heroDesc:
+      "Turn vision into action by empowering school sports in one unified platform.",
+    features: [
+      { title: "17 Sports", desc: "Each with vision, mission, members." },
+      { title: "Tasks", desc: "Plan and track work to done." },
+      { title: "Events", desc: "Schedule fixtures and practices." },
+      { title: "Roles", desc: "Admin, sport leads and members." },
+    ],
+    signup: "Create an account",
+    signin: "Sign in",
+    toggle: "සිංහල",
+    changeLang: "Change Language",
+    signOut: "Sign out",
+
+     login: {
+      title: "Welcome back",
+      subtitle: "Sign in to your committee",
+      email: "Email",
+      password: "Password",
+      forgot: "Forgot password?",
+      resetTitle: "Reset password",
+      sendLink: "Send reset link",
+      sending: "Sending...",
+      signin: "Sign in",
+      signingIn: "Signing in...",
+      noAccount: "No account?",
+      signup: "Sign up",
+      resetEmailError: "Please enter your email",
+      resetSuccess: "Password reset link sent to your email",
+      welcome: "Welcome back!",
+    },
+    
+    
+    nav: {
+      dashboard: "Dashboard",
+      sports: "Sports Hub",
+      athletes: "Athletes",
+      training: "Training Programs",
+      coaches: "Coaches & Staff",
+      overview: "Overview",
+      directory: "Coach Directory",
+      certifications: "Certifications",
+      assignments: "Athlete Assignment",
+      performanceTracking: "Performance Tracking",
+      events: "Events & Tournaments",
+      performance: "Performance & KPIs",
+      facilities: "Facilities",
+      health: "Health & Fitness",
+      reports: "Reports",
+      users: "Users",
+    },
+
+
+    dashboard: {
+        adminTitle: "Admin Dashboard",
+        userTitle: "Dashboard",
+        adminDesc: "Overview of all sports, tasks and events.",
+        userDesc: "Your sports, tasks and upcoming events.",
+        sports: "Sports",
+        mySports: "My Sports",
+        openTasks: "Open tasks",
+        upcomingEvents: "Upcoming events",
+        users: "Users",
+        noEvents: "No upcoming events.",
+    },
+
+    notFound: {
+      title: "Page not found",
+      message: "The page you're looking for doesn't exist.",
+      goHome: "Go home",
+    },
+
+  },
+  si: {
+    brand: "ක්‍රීඩා කමිටු සමූහය ",
+    title: "බණ්ඩාරනායක විද්‍යාලය, ගම්පහ – ආදී ශිෂ්‍ය සංගමය ",
+    subtitle: "ක්‍රීඩා කමිටු සමූහය ",
+    heroDesc:
+      "එක් ඒකාබද්ධ වේදිකාවකින් පාසල් ක්‍රීඩාවන් ශක්තිමත් කර දර්ශනය ක්‍රියාවට නැංවීම.",
+    features: [
+      { title: "ක්‍රීඩා 17ක්", desc: "දර්ශනය, මෙහෙවර සහ සාමාජිකයන් සමඟ." },
+      { title: "කාර්යයන්", desc: "කාර්යයන් සැලසුම් කර අධීක්ෂණය කිරීම." },
+      { title: "අවස්ථා", desc: "තරඟ හා පුහුණු සැලසුම්." },
+      { title: "භූමිකා", desc: "පරිපාලක, නායකයන් සහ සාමාජිකයන්." },
+    ],
+    signup: "ගිණුමක් සාදන්න",
+    signin: "පුරනය වන්න",
+    toggle: "English",
+    changeLang: "භාෂාව වෙනස්කරන්න ",
+    signOut: "ගිණුමෙන් පිටවීම", 
+
+    login: {
+      title: "නැවත පිළිගනිමු",
+      subtitle: "ඔබගේ කමිටුවට පිවිසෙන්න",
+      email: "ඊ-මේල් ලිපිනය",
+      password: "මුරපදය",
+      forgot: "මුරපදය අමතකද?",
+      resetTitle: "මුරපදය යළි සකසන්න",
+      sendLink: "යැවීම",
+      sending: "යැවෙමින්...",
+      signin: "පුරනය වන්න",
+      signingIn: "පුරනය වෙමින්...",
+      noAccount: "ගිණුමක් නැද්ද?",
+      signup: "ලියාපදිංචි වන්න",
+      resetEmailError: "කරුණාකර ඔබගේ ඊ-මේල් ලිපිනය ඇතුළත් කරන්න",
+      resetSuccess: "මුරපදය යළි සකසන සබැඳිය ඔබගේ ඊ-මේල් වෙත යැවුණි",
+      welcome: "නැවත පිළිගනිමු!",
+    },
+    
+    
+    nav: {
+      dashboard: "පුවරුව",
+      sports: "ක්‍රීඩා මධ්‍යස්ථානය",
+      athletes: "ක්‍රීඩකයින්",
+      training: "පුහුණු වැඩසටහන්",
+      coaches: "පුහුණුකරුවන් සහ කාර්ය මණ්ඩලය",
+      overview: "දළ විස්තරය",
+      directory: "පුහුණුකරුවන්ගේ නාමාවලිය",
+      certifications: "සම්මාන සහ සහතික",
+      assignments: "ක්‍රීඩක වෙන්කිරීම්",
+      performanceTracking: "කාර්යසාධන අධීක්ෂණය",
+      events: "තරඟ සහ උත්සව",
+      performance: "කාර්යසාධන දර්ශක",
+      facilities: "පහසුකම්",
+      health: "සෞඛ්‍ය සහ ශරීරාභ්‍යාස",
+      reports: "වාර්තා",
+      users: "පරිශීලකරුවන්",
+    },
+
+
+   dashboard: {
+      adminTitle: "පරිපාලන පුවරුව",
+      userTitle: "පුවරුව",
+      adminDesc: "සියලු ක්‍රීඩා, කාර්යයන් සහ අවස්ථා පිළිබඳ සාරාංශය.",
+      userDesc: "ඔබේ ක්‍රීඩා, කාර්යයන් සහ ඉදිරි අවස්ථා.",
+      sports: "ක්‍රීඩා",
+      mySports: "මගේ ක්‍රීඩා",
+      openTasks: "විවෘත කාර්යයන්",
+      upcomingEvents: "ඉදිරි අවස්ථා",
+      users: "පරිශීලකයින්",
+      noEvents: "ඉදිරි අවස්ථා නොමැත.",
+    },
+
+    notFound: {
+      title: "පිටුව සොයාගත නොහැක",
+      message: "ඔබ සොයන පිටුව පවතින්නේ නැත.",
+      goHome: "මුල් පිටුවට",
+    },
+  },
+  
+};

@@ -10,26 +10,41 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UsersRouteImport } from './routes/users'
-import { Route as SportsRouteImport } from './routes/sports'
 import { Route as SignupRouteImport } from './routes/signup'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SportsSportIdRouteImport } from './routes/sports.$sportId'
+import { Route as PagesTrainingRouteImport } from './routes/pages/training'
+import { Route as PagesSportsRouteImport } from './routes/pages/sports'
+import { Route as PagesReportsRouteImport } from './routes/pages/reports'
+import { Route as PagesPerformanceRouteImport } from './routes/pages/performance'
+import { Route as PagesHealthRouteImport } from './routes/pages/health'
+import { Route as PagesFacilitiesRouteImport } from './routes/pages/facilities'
+import { Route as PagesEventsRouteImport } from './routes/pages/events'
+import { Route as PagesCoachesRouteImport } from './routes/pages/coaches'
+import { Route as PagesAthletesRouteImport } from './routes/pages/athletes'
+import { Route as PagesCoachesIndexRouteImport } from './routes/pages/coaches/index'
+import { Route as PagesCoachesPerformanceRouteImport } from './routes/pages/coaches/performance'
+import { Route as PagesCoachesDirectoryRouteImport } from './routes/pages/coaches/directory'
+import { Route as PagesCoachesCertificationsRouteImport } from './routes/pages/coaches/certifications'
+import { Route as PagesCoachesAssignmentsRouteImport } from './routes/pages/coaches/assignments'
+import { Route as PagesCoachesLayoutRouteImport } from './routes/pages/coaches/_layout'
 
 const UsersRoute = UsersRouteImport.update({
   id: '/users',
   path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SportsRoute = SportsRouteImport.update({
-  id: '/sports',
-  path: '/sports',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SignupRoute = SignupRouteImport.update({
   id: '/signup',
   path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -48,38 +63,155 @@ const IndexRoute = IndexRouteImport.update({
   getParentRoute: () => rootRouteImport,
 } as any)
 const SportsSportIdRoute = SportsSportIdRouteImport.update({
-  id: '/$sportId',
-  path: '/$sportId',
-  getParentRoute: () => SportsRoute,
+  id: '/sports/$sportId',
+  path: '/sports/$sportId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesTrainingRoute = PagesTrainingRouteImport.update({
+  id: '/pages/training',
+  path: '/pages/training',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesSportsRoute = PagesSportsRouteImport.update({
+  id: '/pages/sports',
+  path: '/pages/sports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesReportsRoute = PagesReportsRouteImport.update({
+  id: '/pages/reports',
+  path: '/pages/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesPerformanceRoute = PagesPerformanceRouteImport.update({
+  id: '/pages/performance',
+  path: '/pages/performance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesHealthRoute = PagesHealthRouteImport.update({
+  id: '/pages/health',
+  path: '/pages/health',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesFacilitiesRoute = PagesFacilitiesRouteImport.update({
+  id: '/pages/facilities',
+  path: '/pages/facilities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesEventsRoute = PagesEventsRouteImport.update({
+  id: '/pages/events',
+  path: '/pages/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesCoachesRoute = PagesCoachesRouteImport.update({
+  id: '/pages/coaches',
+  path: '/pages/coaches',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesAthletesRoute = PagesAthletesRouteImport.update({
+  id: '/pages/athletes',
+  path: '/pages/athletes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesCoachesIndexRoute = PagesCoachesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PagesCoachesRoute,
+} as any)
+const PagesCoachesPerformanceRoute = PagesCoachesPerformanceRouteImport.update({
+  id: '/performance',
+  path: '/performance',
+  getParentRoute: () => PagesCoachesRoute,
+} as any)
+const PagesCoachesDirectoryRoute = PagesCoachesDirectoryRouteImport.update({
+  id: '/directory',
+  path: '/directory',
+  getParentRoute: () => PagesCoachesRoute,
+} as any)
+const PagesCoachesCertificationsRoute =
+  PagesCoachesCertificationsRouteImport.update({
+    id: '/certifications',
+    path: '/certifications',
+    getParentRoute: () => PagesCoachesRoute,
+  } as any)
+const PagesCoachesAssignmentsRoute = PagesCoachesAssignmentsRouteImport.update({
+  id: '/assignments',
+  path: '/assignments',
+  getParentRoute: () => PagesCoachesRoute,
+} as any)
+const PagesCoachesLayoutRoute = PagesCoachesLayoutRouteImport.update({
+  id: '/_layout',
+  getParentRoute: () => PagesCoachesRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/sports': typeof SportsRouteWithChildren
   '/users': typeof UsersRoute
+  '/pages/athletes': typeof PagesAthletesRoute
+  '/pages/coaches': typeof PagesCoachesLayoutRoute
+  '/pages/events': typeof PagesEventsRoute
+  '/pages/facilities': typeof PagesFacilitiesRoute
+  '/pages/health': typeof PagesHealthRoute
+  '/pages/performance': typeof PagesPerformanceRoute
+  '/pages/reports': typeof PagesReportsRoute
+  '/pages/sports': typeof PagesSportsRoute
+  '/pages/training': typeof PagesTrainingRoute
   '/sports/$sportId': typeof SportsSportIdRoute
+  '/pages/coaches/assignments': typeof PagesCoachesAssignmentsRoute
+  '/pages/coaches/certifications': typeof PagesCoachesCertificationsRoute
+  '/pages/coaches/directory': typeof PagesCoachesDirectoryRoute
+  '/pages/coaches/performance': typeof PagesCoachesPerformanceRoute
+  '/pages/coaches/': typeof PagesCoachesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/sports': typeof SportsRouteWithChildren
   '/users': typeof UsersRoute
+  '/pages/athletes': typeof PagesAthletesRoute
+  '/pages/events': typeof PagesEventsRoute
+  '/pages/facilities': typeof PagesFacilitiesRoute
+  '/pages/health': typeof PagesHealthRoute
+  '/pages/performance': typeof PagesPerformanceRoute
+  '/pages/reports': typeof PagesReportsRoute
+  '/pages/sports': typeof PagesSportsRoute
+  '/pages/training': typeof PagesTrainingRoute
   '/sports/$sportId': typeof SportsSportIdRoute
+  '/pages/coaches': typeof PagesCoachesIndexRoute
+  '/pages/coaches/assignments': typeof PagesCoachesAssignmentsRoute
+  '/pages/coaches/certifications': typeof PagesCoachesCertificationsRoute
+  '/pages/coaches/directory': typeof PagesCoachesDirectoryRoute
+  '/pages/coaches/performance': typeof PagesCoachesPerformanceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/login': typeof LoginRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/signup': typeof SignupRoute
-  '/sports': typeof SportsRouteWithChildren
   '/users': typeof UsersRoute
+  '/pages/athletes': typeof PagesAthletesRoute
+  '/pages/coaches': typeof PagesCoachesRouteWithChildren
+  '/pages/events': typeof PagesEventsRoute
+  '/pages/facilities': typeof PagesFacilitiesRoute
+  '/pages/health': typeof PagesHealthRoute
+  '/pages/performance': typeof PagesPerformanceRoute
+  '/pages/reports': typeof PagesReportsRoute
+  '/pages/sports': typeof PagesSportsRoute
+  '/pages/training': typeof PagesTrainingRoute
   '/sports/$sportId': typeof SportsSportIdRoute
+  '/pages/coaches/_layout': typeof PagesCoachesLayoutRoute
+  '/pages/coaches/assignments': typeof PagesCoachesAssignmentsRoute
+  '/pages/coaches/certifications': typeof PagesCoachesCertificationsRoute
+  '/pages/coaches/directory': typeof PagesCoachesDirectoryRoute
+  '/pages/coaches/performance': typeof PagesCoachesPerformanceRoute
+  '/pages/coaches/': typeof PagesCoachesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -87,37 +219,89 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/login'
+    | '/reset-password'
     | '/signup'
-    | '/sports'
     | '/users'
+    | '/pages/athletes'
+    | '/pages/coaches'
+    | '/pages/events'
+    | '/pages/facilities'
+    | '/pages/health'
+    | '/pages/performance'
+    | '/pages/reports'
+    | '/pages/sports'
+    | '/pages/training'
     | '/sports/$sportId'
+    | '/pages/coaches/assignments'
+    | '/pages/coaches/certifications'
+    | '/pages/coaches/directory'
+    | '/pages/coaches/performance'
+    | '/pages/coaches/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dashboard'
     | '/login'
+    | '/reset-password'
     | '/signup'
-    | '/sports'
     | '/users'
+    | '/pages/athletes'
+    | '/pages/events'
+    | '/pages/facilities'
+    | '/pages/health'
+    | '/pages/performance'
+    | '/pages/reports'
+    | '/pages/sports'
+    | '/pages/training'
     | '/sports/$sportId'
+    | '/pages/coaches'
+    | '/pages/coaches/assignments'
+    | '/pages/coaches/certifications'
+    | '/pages/coaches/directory'
+    | '/pages/coaches/performance'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
     | '/login'
+    | '/reset-password'
     | '/signup'
-    | '/sports'
     | '/users'
+    | '/pages/athletes'
+    | '/pages/coaches'
+    | '/pages/events'
+    | '/pages/facilities'
+    | '/pages/health'
+    | '/pages/performance'
+    | '/pages/reports'
+    | '/pages/sports'
+    | '/pages/training'
     | '/sports/$sportId'
+    | '/pages/coaches/_layout'
+    | '/pages/coaches/assignments'
+    | '/pages/coaches/certifications'
+    | '/pages/coaches/directory'
+    | '/pages/coaches/performance'
+    | '/pages/coaches/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
   LoginRoute: typeof LoginRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   SignupRoute: typeof SignupRoute
-  SportsRoute: typeof SportsRouteWithChildren
   UsersRoute: typeof UsersRoute
+  PagesAthletesRoute: typeof PagesAthletesRoute
+  PagesCoachesRoute: typeof PagesCoachesRouteWithChildren
+  PagesEventsRoute: typeof PagesEventsRoute
+  PagesFacilitiesRoute: typeof PagesFacilitiesRoute
+  PagesHealthRoute: typeof PagesHealthRoute
+  PagesPerformanceRoute: typeof PagesPerformanceRoute
+  PagesReportsRoute: typeof PagesReportsRoute
+  PagesSportsRoute: typeof PagesSportsRoute
+  PagesTrainingRoute: typeof PagesTrainingRoute
+  SportsSportIdRoute: typeof SportsSportIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -129,18 +313,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sports': {
-      id: '/sports'
-      path: '/sports'
-      fullPath: '/sports'
-      preLoaderRoute: typeof SportsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/signup': {
       id: '/signup'
       path: '/signup'
       fullPath: '/signup'
       preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -166,32 +350,158 @@ declare module '@tanstack/react-router' {
     }
     '/sports/$sportId': {
       id: '/sports/$sportId'
-      path: '/$sportId'
+      path: '/sports/$sportId'
       fullPath: '/sports/$sportId'
       preLoaderRoute: typeof SportsSportIdRouteImport
-      parentRoute: typeof SportsRoute
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/training': {
+      id: '/pages/training'
+      path: '/pages/training'
+      fullPath: '/pages/training'
+      preLoaderRoute: typeof PagesTrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/sports': {
+      id: '/pages/sports'
+      path: '/pages/sports'
+      fullPath: '/pages/sports'
+      preLoaderRoute: typeof PagesSportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/reports': {
+      id: '/pages/reports'
+      path: '/pages/reports'
+      fullPath: '/pages/reports'
+      preLoaderRoute: typeof PagesReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/performance': {
+      id: '/pages/performance'
+      path: '/pages/performance'
+      fullPath: '/pages/performance'
+      preLoaderRoute: typeof PagesPerformanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/health': {
+      id: '/pages/health'
+      path: '/pages/health'
+      fullPath: '/pages/health'
+      preLoaderRoute: typeof PagesHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/facilities': {
+      id: '/pages/facilities'
+      path: '/pages/facilities'
+      fullPath: '/pages/facilities'
+      preLoaderRoute: typeof PagesFacilitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/events': {
+      id: '/pages/events'
+      path: '/pages/events'
+      fullPath: '/pages/events'
+      preLoaderRoute: typeof PagesEventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/coaches': {
+      id: '/pages/coaches'
+      path: '/pages/coaches'
+      fullPath: '/pages/coaches'
+      preLoaderRoute: typeof PagesCoachesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/athletes': {
+      id: '/pages/athletes'
+      path: '/pages/athletes'
+      fullPath: '/pages/athletes'
+      preLoaderRoute: typeof PagesAthletesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages/coaches/': {
+      id: '/pages/coaches/'
+      path: '/'
+      fullPath: '/pages/coaches/'
+      preLoaderRoute: typeof PagesCoachesIndexRouteImport
+      parentRoute: typeof PagesCoachesRoute
+    }
+    '/pages/coaches/performance': {
+      id: '/pages/coaches/performance'
+      path: '/performance'
+      fullPath: '/pages/coaches/performance'
+      preLoaderRoute: typeof PagesCoachesPerformanceRouteImport
+      parentRoute: typeof PagesCoachesRoute
+    }
+    '/pages/coaches/directory': {
+      id: '/pages/coaches/directory'
+      path: '/directory'
+      fullPath: '/pages/coaches/directory'
+      preLoaderRoute: typeof PagesCoachesDirectoryRouteImport
+      parentRoute: typeof PagesCoachesRoute
+    }
+    '/pages/coaches/certifications': {
+      id: '/pages/coaches/certifications'
+      path: '/certifications'
+      fullPath: '/pages/coaches/certifications'
+      preLoaderRoute: typeof PagesCoachesCertificationsRouteImport
+      parentRoute: typeof PagesCoachesRoute
+    }
+    '/pages/coaches/assignments': {
+      id: '/pages/coaches/assignments'
+      path: '/assignments'
+      fullPath: '/pages/coaches/assignments'
+      preLoaderRoute: typeof PagesCoachesAssignmentsRouteImport
+      parentRoute: typeof PagesCoachesRoute
+    }
+    '/pages/coaches/_layout': {
+      id: '/pages/coaches/_layout'
+      path: ''
+      fullPath: '/pages/coaches'
+      preLoaderRoute: typeof PagesCoachesLayoutRouteImport
+      parentRoute: typeof PagesCoachesRoute
     }
   }
 }
 
-interface SportsRouteChildren {
-  SportsSportIdRoute: typeof SportsSportIdRoute
+interface PagesCoachesRouteChildren {
+  PagesCoachesLayoutRoute: typeof PagesCoachesLayoutRoute
+  PagesCoachesAssignmentsRoute: typeof PagesCoachesAssignmentsRoute
+  PagesCoachesCertificationsRoute: typeof PagesCoachesCertificationsRoute
+  PagesCoachesDirectoryRoute: typeof PagesCoachesDirectoryRoute
+  PagesCoachesPerformanceRoute: typeof PagesCoachesPerformanceRoute
+  PagesCoachesIndexRoute: typeof PagesCoachesIndexRoute
 }
 
-const SportsRouteChildren: SportsRouteChildren = {
-  SportsSportIdRoute: SportsSportIdRoute,
+const PagesCoachesRouteChildren: PagesCoachesRouteChildren = {
+  PagesCoachesLayoutRoute: PagesCoachesLayoutRoute,
+  PagesCoachesAssignmentsRoute: PagesCoachesAssignmentsRoute,
+  PagesCoachesCertificationsRoute: PagesCoachesCertificationsRoute,
+  PagesCoachesDirectoryRoute: PagesCoachesDirectoryRoute,
+  PagesCoachesPerformanceRoute: PagesCoachesPerformanceRoute,
+  PagesCoachesIndexRoute: PagesCoachesIndexRoute,
 }
 
-const SportsRouteWithChildren =
-  SportsRoute._addFileChildren(SportsRouteChildren)
+const PagesCoachesRouteWithChildren = PagesCoachesRoute._addFileChildren(
+  PagesCoachesRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   LoginRoute: LoginRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   SignupRoute: SignupRoute,
-  SportsRoute: SportsRouteWithChildren,
   UsersRoute: UsersRoute,
+  PagesAthletesRoute: PagesAthletesRoute,
+  PagesCoachesRoute: PagesCoachesRouteWithChildren,
+  PagesEventsRoute: PagesEventsRoute,
+  PagesFacilitiesRoute: PagesFacilitiesRoute,
+  PagesHealthRoute: PagesHealthRoute,
+  PagesPerformanceRoute: PagesPerformanceRoute,
+  PagesReportsRoute: PagesReportsRoute,
+  PagesSportsRoute: PagesSportsRoute,
+  PagesTrainingRoute: PagesTrainingRoute,
+  SportsSportIdRoute: SportsSportIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

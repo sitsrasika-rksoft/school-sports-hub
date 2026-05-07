@@ -3,6 +3,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/auth-context";
 
 import appCss from "../styles.css?url";
+import { LanguageProvider } from "@/lib/language-context";
+
+
 
 function NotFoundComponent() {
   return (
@@ -31,7 +34,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SportsCom — School Sports Committee Hub" },
+      { title: "BC-OBA — Sports Committee Hub" },
       {
         name: "description",
         content:
@@ -62,7 +65,11 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <AuthProvider>
+      
+    <LanguageProvider>
       <Outlet />
+    </LanguageProvider>
+
       <Toaster richColors position="top-right" />
     </AuthProvider>
   );

@@ -163,6 +163,7 @@ export type Database = {
           name: string
           updated_at: string
           vision: string | null
+          sport_code: string | null
         }
         Insert: {
           cover_url?: string | null
@@ -174,6 +175,7 @@ export type Database = {
           name: string
           updated_at?: string
           vision?: string | null
+          sport_code?: string | null
         }
         Update: {
           cover_url?: string | null
@@ -185,6 +187,7 @@ export type Database = {
           name?: string
           updated_at?: string
           vision?: string | null
+          sport_code?: string | null
         }
         Relationships: []
       }

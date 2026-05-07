@@ -1,14 +1,26 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
 import { Trophy, Users, CalendarDays, ListChecks, ArrowRight } from "lucide-react";
+
+import football from "@/assets/hero/01.jpg";
+import cricket from "@/assets/hero/02.jpg";
+import volleyball from "@/assets/hero/03.jpg";
+import athletics from "@/assets/hero/04.jpg";
+
+import { useLanguage } from "@/lib/language-context";
+import { translations } from "@/lib/translations";
 
 export const Route = createFileRoute("/")({
   component: Landing,
 });
 
 function Landing() {
+  // Hooks must be INSIDE component
+  const { lang, setLang } = useLanguage();
+  const t = translations[lang];
+
   const { user, loading } = useAuth();
   const navigate = useNavigate();
 
@@ -16,9 +28,23 @@ function Landing() {
     if (!loading && user) navigate({ to: "/dashboard" });
   }, [user, loading, navigate]);
 
+  const heroImages = [football, cricket, volleyball, athletics];
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background">
-      {/* Nav */}
+    <div
+      className={`min-h-screen bg-background ${
+        lang === "si" ? "font-sinhala" : ""
+      }`}
+    >
+      {/* HEADER */}
       <header className="px-6 py-5 flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
           <div
@@ -27,75 +53,83 @@ function Landing() {
           >
             SC
           </div>
-          <span className="font-bold text-lg">SportsCom</span>
+          <span className="font-bold text-lg">{t.brand}</span>
         </div>
+
         <div className="flex items-center gap-2">
+          <p className="text-sm">Language : </p>
+          <Button
+            size="sm"
+            className="font-bold"
+            variant="outline"
+            onClick={() => setLang(lang === "en" ? "si" : "en")}
+          >
+            {t.toggle}
+          </Button>
+
+          {/* <Link to="/signup">
+            <Button size="lg" className="gap-2">
+              {t.signup} <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+
           <Link to="/login">
-            <Button variant="ghost" size="sm">Sign in</Button>
-          </Link>
-          <Link to="/signup">
-            <Button size="sm">Get started</Button>
-          </Link>
+            <Button size="lg" variant="outline" className="bg-white/10">
+              {t.signin}
+            </Button>
+          </Link> */}
         </div>
       </header>
 
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{ background: "var(--gradient-hero)" }}
-        />
-        <div className="relative max-w-7xl mx-auto px-6 py-20 sm:py-28 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-xs font-medium mb-6">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-            Built for school sports committees
-          </div>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight">
-            Run your college's
-            <span
-              className="block bg-clip-text text-transparent"
-              style={{ backgroundImage: "var(--gradient-hero)" }}
-            >
-              sports society
-            </span>
+      {/* HERO */}
+      <section className="relative overflow-hidden min-h-[60vh] sm:min-h-[75vh] lg:min-h-[65vh]">
+        <div className="absolute inset-0">
+          {heroImages.map((img, index) => (
+            <div
+              key={img}
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+                index === currentImage ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ backgroundImage: `url(${img})` }}
+            />
+          ))}
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-6 py-20 sm:py-28 text-center text-white">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight">
+            {t.title}
+            <span className="block text-primary">{t.subtitle}</span>
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Manage every sport — its vision, mission, tasks, events, members and progress —
-            from one role-based hub.
+
+          <p className="mt-6 text-lg text-white/80 max-w-2xl mx-auto">
+            {t.heroDesc}
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+
+          <div className="mt-15 flex flex-wrap items-center justify-center gap-3">
             <Link to="/signup">
               <Button size="lg" className="gap-2">
-                Create an account <ArrowRight className="h-4 w-4" />
+                 {t.signup} <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
             <Link to="/login">
-              <Button size="lg" variant="outline">Sign in</Button>
+              <Button size="lg" variant="outline" className="bg-white/10 text-white">
+               {t.signin}
+              </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* FEATURES */}
       <section className="max-w-7xl mx-auto px-6 pb-24">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[
-            { icon: Trophy, title: "17 Sports", desc: "Each with vision, mission, members." },
-            { icon: ListChecks, title: "Tasks", desc: "Plan and track work to done." },
-            { icon: CalendarDays, title: "Events", desc: "Schedule fixtures and practices." },
-            { icon: Users, title: "Roles", desc: "Admin, sport leads and members." },
-          ].map((f) => (
+          {t.features.map((f, i) => (
             <div
-              key={f.title}
+              key={i}
               className="p-6 rounded-xl bg-card border border-border"
               style={{ boxShadow: "var(--shadow-card)" }}
             >
-              <div
-                className="h-10 w-10 rounded-lg flex items-center justify-center mb-4"
-                style={{ background: "var(--gradient-primary)" }}
-              >
-                <f.icon className="h-5 w-5 text-primary-foreground" />
-              </div>
               <h3 className="font-semibold mb-1">{f.title}</h3>
               <p className="text-sm text-muted-foreground">{f.desc}</p>
             </div>

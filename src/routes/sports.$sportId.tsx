@@ -10,6 +10,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import {
+  BarChart,
+  Bar,
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
 import {
   Dialog,
   DialogContent,
@@ -42,6 +53,7 @@ interface Sport {
   description: string | null;
   vision: string | null;
   mission: string | null;
+  sport_code: string | null;
 }
 interface Task {
   id: string;
@@ -208,6 +220,37 @@ function OverviewTab({
   const [vision, setVision] = useState(sport.vision ?? "");
   const [mission, setMission] = useState(sport.mission ?? "");
   const [saving, setSaving] = useState(false);
+  
+const barData = [
+  { name: "Jan", value: 4 },
+  { name: "Feb", value: 6 },
+  { name: "Mar", value: 3 },
+  { name: "Apr", value: 8 },
+];
+
+const pieData = [
+  { name: "Completed", value: 12 },
+  { name: "In Progress", value: 7 },
+  { name: "Pending", value: 5 },
+];
+
+const COLORS = ["#22c55e", "#facc15", "#ef4444"];
+
+// TASK DATA (example)
+const taskBarData = [
+  { name: "Todo", value: 6 },
+  { name: "In Progress", value: 4 },
+  { name: "Done", value: 10 },
+];
+
+// ACHIEVEMENT DATA (example)
+const achievementData = [
+  { name: "Gold", value: 3 },
+  { name: "Silver", value: 5 },
+  { name: "Bronze", value: 4 },
+];
+
+// const COLORS = ["#22c55e", "#facc15", "#ef4444"];
 
   const save = async () => {
     setSaving(true);
@@ -222,43 +265,248 @@ function OverviewTab({
   };
 
   return (
-    <div className="grid md:grid-cols-2 gap-4">
-      <Card>
-        <CardHeader>
-          <CardTitle>Vision</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Textarea
-            rows={6}
-            value={vision}
-            onChange={(e) => setVision(e.target.value)}
-            disabled={!canEdit}
-            placeholder="Our long-term vision…"
-          />
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Mission</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Textarea
-            rows={6}
-            value={mission}
-            onChange={(e) => setMission(e.target.value)}
-            disabled={!canEdit}
-            placeholder="What we will do…"
-          />
-        </CardContent>
-      </Card>
-      {canEdit && (
-        <div className="md:col-span-2">
-          <Button onClick={save} disabled={saving}>
-            {saving ? "Saving…" : "Save changes"}
-          </Button>
-        </div>
-      )}
-    </div>
+    <div className="space-y-6">
+
+  {/* SUMMARY CARDS */}
+  <div className="grid sm:grid-cols-4 gap-4">
+    <Card>
+      <CardContent className="py-6 text-center">
+        <p className="text-2xl font-bold">20</p>
+        <p className="text-sm text-muted-foreground">Total Tasks</p>
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardContent className="py-6 text-center">
+        <p className="text-2xl font-bold">10</p>
+        <p className="text-sm text-muted-foreground">Completed Tasks</p>
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardContent className="py-6 text-center">
+        <p className="text-2xl font-bold">12</p>
+        <p className="text-sm text-muted-foreground">Medals Won</p>
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardContent className="py-6 text-center">
+        <p className="text-2xl font-bold">8</p>
+        <p className="text-sm text-muted-foreground">Tournaments</p>
+      </CardContent>
+    </Card>
+  </div>
+
+  {/* TASK + ACHIEVEMENT CHARTS */}
+  <div className="grid lg:grid-cols-3 gap-4">
+
+    {/* TASK BAR CHART */}
+    <Card>
+      <CardHeader>
+        <CardTitle>Task Status</CardTitle>
+      </CardHeader>
+      <CardContent className="h-56">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart data={taskBarData}>
+            <Tooltip />
+            <Bar dataKey="value" fill="#2563eb" radius={[4, 4, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
+
+    {/* TASK DONUT CHART */}
+    <Card>
+      <CardHeader>
+        <CardTitle>Task Completion</CardTitle>
+      </CardHeader>
+      <CardContent className="h-56">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Tooltip />
+            <Pie
+              data={taskBarData}
+              dataKey="value"
+              innerRadius={45}
+              outerRadius={80}
+            >
+              {taskBarData.map((_, i) => (
+                <Cell key={i} fill={COLORS[i]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
+
+    {/* ACHIEVEMENT PIE CHART */}
+    <Card>
+      <CardHeader>
+        <CardTitle>Achievements</CardTitle>
+      </CardHeader>
+      <CardContent className="h-56">
+        <ResponsiveContainer width="100%" height="100%">
+          <PieChart>
+            <Tooltip />
+            <Pie data={achievementData} dataKey="value" outerRadius={80}>
+              {achievementData.map((_, i) => (
+                <Cell key={i} fill={COLORS[i]} />
+              ))}
+            </Pie>
+          </PieChart>
+        </ResponsiveContainer>
+      </CardContent>
+    </Card>
+
+  </div>
+</div>
+//     <div className="space-y-6">
+
+//   {/* VISION & MISSION */}
+//   <div className="grid md:grid-cols-2 gap-4">
+//     <Card>
+//       <CardHeader>
+//         <CardTitle>Vision</CardTitle>
+//       </CardHeader>
+//       <CardContent>
+//         <Textarea
+//           rows={6}
+//           value={vision}
+//           onChange={(e) => setVision(e.target.value)}
+//           disabled={!canEdit}
+//           placeholder="Our long-term vision…"
+//         />
+//       </CardContent>
+//     </Card>
+
+//     <Card>
+//       <CardHeader>
+//         <CardTitle>Mission</CardTitle>
+//       </CardHeader>
+//       <CardContent>
+//         <Textarea
+//           rows={6}
+//           value={mission}
+//           onChange={(e) => setMission(e.target.value)}
+//           disabled={!canEdit}
+//           placeholder="What we will do…"
+//         />
+//       </CardContent>
+//     </Card>
+
+//     {canEdit && (
+//       <div className="md:col-span-2">
+//         <Button onClick={save} disabled={saving}>
+//           {saving ? "Saving…" : "Save changes"}
+//         </Button>
+//       </div>
+//     )}
+//   </div>
+
+//   {/* CHARTS SECTION */}
+//   <div className="grid lg:grid-cols-3 gap-4">
+
+//     {/* BAR CHART */}
+//     <Card>
+//       <CardHeader>
+//         <CardTitle>Monthly Activities</CardTitle>
+//       </CardHeader>
+//       <CardContent className="h-60">
+//         <ResponsiveContainer width="100%" height="100%">
+//           <BarChart data={barData}>
+//             <Tooltip />
+//             <Bar dataKey="value" fill="#2563eb" radius={[4, 4, 0, 0]} />
+//           </BarChart>
+//         </ResponsiveContainer>
+//       </CardContent>
+//     </Card>
+
+//     {/* PIE CHART */}
+//     <Card>
+//       <CardHeader>
+//         <CardTitle>Task Distribution</CardTitle>
+//       </CardHeader>
+//       <CardContent className="h-60">
+//         <ResponsiveContainer width="100%" height="100%">
+//           <PieChart>
+//             <Tooltip />
+//             <Pie data={pieData} dataKey="value" outerRadius={80}>
+//               {pieData.map((_, i) => (
+//                 <Cell key={i} fill={COLORS[i]} />
+//               ))}
+//             </Pie>
+//           </PieChart>
+//         </ResponsiveContainer>
+//       </CardContent>
+//     </Card>
+
+//     {/* DONUT CHART */}
+//     <Card>
+//       <CardHeader>
+//         <CardTitle>Progress Overview</CardTitle>
+//       </CardHeader>
+//       <CardContent className="h-60">
+//         <ResponsiveContainer width="100%" height="100%">
+//           <PieChart>
+//             <Tooltip />
+//             <Pie
+//               data={pieData}
+//               dataKey="value"
+//               innerRadius={45}
+//               outerRadius={80}
+//             >
+//               {pieData.map((_, i) => (
+//                 <Cell key={i} fill={COLORS[i]} />
+//               ))}
+//             </Pie>
+//           </PieChart>
+//         </ResponsiveContainer>
+//       </CardContent>
+//     </Card>
+
+//   </div>
+// </div>
+
+
+
+    // <div className="grid md:grid-cols-2 gap-4">
+    //   <Card>
+    //     <CardHeader>
+    //       <CardTitle>Vision</CardTitle>
+    //     </CardHeader>
+    //     <CardContent>
+    //       <Textarea
+    //         rows={6}
+    //         value={vision}
+    //         onChange={(e) => setVision(e.target.value)}
+    //         disabled={!canEdit}
+    //         placeholder="Our long-term vision…"
+    //       />
+    //     </CardContent>
+    //   </Card>
+    //   <Card>
+    //     <CardHeader>
+    //       <CardTitle>Mission</CardTitle>
+    //     </CardHeader>
+    //     <CardContent>
+    //       <Textarea
+    //         rows={6}
+    //         value={mission}
+    //         onChange={(e) => setMission(e.target.value)}
+    //         disabled={!canEdit}
+    //         placeholder="What we will do…"
+    //       />
+    //     </CardContent>
+    //   </Card>
+    //   {canEdit && (
+    //     <div className="md:col-span-2">
+    //       <Button onClick={save} disabled={saving}>
+    //         {saving ? "Saving…" : "Save changes"}
+    //       </Button>
+    //     </div>
+    //   )}
+    // </div>
   );
 }
 
