@@ -10,6 +10,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLanguage } from "@/lib/language-context";
+
+
 
 import {
   BarChart,
@@ -46,6 +49,79 @@ export const Route = createFileRoute("/sports/$sportId")({
     </ProtectedRoute>
   ),
 });
+
+const { lang } = useLanguage();
+  
+const t = lang === "si"
+  ? {
+      loading: "ක්‍රීඩාව පූරණය වෙමින්…",
+      overview: "දළ විස්තරය",
+      tasks: "කාර්යයන්",
+      events: "අවස්ථා",
+      progress: "ප්‍රගතිය",
+      members: "සාමාජිකයන්",
+
+      totalTasks: "මුළු කාර්යයන්",
+      completedTasks: "සම්පූර්ණ කළ කාර්යයන්",
+      medalsWon: "ලැබූ පදක්කම්",
+      tournaments: "තරඟ",
+
+      taskStatus: "කාර්ය තත්ත්වය",
+      taskCompletion: "කාර්ය සම්පූර්ණය",
+      achievements: "ජයග්‍රහණ",
+
+      newTask: "නව කාර්යය",
+      newEvent: "නව අවස්ථාව",
+      newReport: "නව වාර්තාව",
+
+      noTasks: "කාර්යයන් නොමැත.",
+      noEvents: "අවස්ථා සැලසුම් කර නොමැත.",
+      noReports: "තවමත් වාර්තා නොමැත.",
+      noMembers: "තවමත් සාමාජිකයන් නොමැත.",
+
+      todo: "කරන්න ඇති",
+      inProgress: "ක්‍රියාත්මක",
+      done: "සම්පූර්ණයි",
+
+      create: "සාදන්න",
+      save: "සුරකින්න",
+      saved: "සුරකින ලදී",
+    }
+  : {
+      loading: "Loading sport…",
+      overview: "Overview",
+      tasks: "Tasks",
+      events: "Events",
+      progress: "Progress",
+      members: "Members",
+
+      totalTasks: "Total Tasks",
+      completedTasks: "Completed Tasks",
+      medalsWon: "Medals Won",
+      tournaments: "Tournaments",
+
+      taskStatus: "Task Status",
+      taskCompletion: "Task Completion",
+      achievements: "Achievements",
+
+      newTask: "New task",
+      newEvent: "New event",
+      newReport: "New report",
+
+      noTasks: "No tasks.",
+      noEvents: "No events scheduled.",
+      noReports: "No reports yet.",
+      noMembers: "No members assigned yet.",
+
+      todo: "Todo",
+      inProgress: "In progress",
+      done: "Done",
+
+      create: "Create",
+      save: "Save",
+      saved: "Saved",
+    };
+
 
 interface Sport {
   id: string;
@@ -86,6 +162,8 @@ interface Profile {
 }
 
 function SportDetail() {
+  
+
   const { sportId } = useParams({ from: "/sports/$sportId" });
   const { isAdmin, user, mySportIds } = useAuth();
   const [sport, setSport] = useState<Sport | null>(null);
@@ -144,7 +222,7 @@ function SportDetail() {
 
   if (!sport) {
     return (
-      <div className="text-muted-foreground">Loading sport…</div>
+     <div className="text-muted-foreground">{t.loading}</div>
     );
   }
 
@@ -159,11 +237,11 @@ function SportDetail() {
 
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="flex-wrap h-auto">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="tasks">Tasks</TabsTrigger>
-          <TabsTrigger value="events">Events</TabsTrigger>
-          <TabsTrigger value="progress">Progress</TabsTrigger>
-          <TabsTrigger value="members">Members</TabsTrigger>
+          <TabsTrigger value="overview">{t.overview}</TabsTrigger>
+          <TabsTrigger value="tasks">{t.tasks}</TabsTrigger>
+          <TabsTrigger value="events">{t.events}</TabsTrigger>
+          <TabsTrigger value="progress">{t.progress}</TabsTrigger>
+          <TabsTrigger value="members">{t.members}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="mt-4">
@@ -260,7 +338,7 @@ const achievementData = [
       .eq("id", sport.id);
     setSaving(false);
     if (error) return toast.error(error.message);
-    toast.success("Saved");
+    toast.success(t.saved);
     onSaved();
   };
 
@@ -304,7 +382,7 @@ const achievementData = [
     {/* TASK BAR CHART */}
     <Card>
       <CardHeader>
-        <CardTitle>Task Status</CardTitle>
+        <CardTitle>{t.taskStatus}</CardTitle>
       </CardHeader>
       <CardContent className="h-56">
         <ResponsiveContainer width="100%" height="100%">
@@ -319,7 +397,7 @@ const achievementData = [
     {/* TASK DONUT CHART */}
     <Card>
       <CardHeader>
-        <CardTitle>Task Completion</CardTitle>
+        <CardTitle>{t.taskCompletion}</CardTitle>
       </CardHeader>
       <CardContent className="h-56">
         <ResponsiveContainer width="100%" height="100%">
@@ -343,7 +421,7 @@ const achievementData = [
     {/* ACHIEVEMENT PIE CHART */}
     <Card>
       <CardHeader>
-        <CardTitle>Achievements</CardTitle>
+        <CardTitle>{t.achievements}</CardTitle>
       </CardHeader>
       <CardContent className="h-56">
         <ResponsiveContainer width="100%" height="100%">
@@ -567,7 +645,7 @@ function TasksTab({
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button>
-              <Plus className="h-4 w-4 mr-2" /> New task
+              <Plus className="h-4 w-4 mr-2" /> {t.newTask}
             </Button>
           </DialogTrigger>
           <DialogContent>
@@ -588,7 +666,7 @@ function TasksTab({
                 <Input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
               </div>
               <DialogFooter>
-                <Button type="submit">Create</Button>
+                <Button type="submit">{t.create}</Button>
               </DialogFooter>
             </form>
           </DialogContent>
@@ -608,7 +686,7 @@ function TasksTab({
             </CardHeader>
             <CardContent className="space-y-2">
               {grouped[col].length === 0 && (
-                <p className="text-xs text-muted-foreground">No tasks.</p>
+                <p className="text-xs text-muted-foreground">{t.noTasks}</p>
               )}
               {grouped[col].map((t) => (
                 <div

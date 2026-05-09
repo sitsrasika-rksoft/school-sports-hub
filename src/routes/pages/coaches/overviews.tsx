@@ -1,28 +1,22 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { ProtectedRoute } from "@/components/ProtectedRoute";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  UserCheck,
-  Award,
-  Users,
-  ClipboardList,
-} from "lucide-react";
-import { useLanguage } from "@/lib/language-context";
+import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { useLanguage } from '@/lib/language-context';
+import { createFileRoute } from '@tanstack/react-router'
+import { UserCheck, Award, Users, ClipboardList } from 'lucide-react';
 
-export const Route = createFileRoute("/pages/coaches")({
+export const Route = createFileRoute('/pages/coaches/overviews')({
   component: () => (
-    <ProtectedRoute>
-      <CoachesPage />
-    </ProtectedRoute>
+    <>
+      <ProtectedRoute>
+        <OverviewsPage />
+      </ProtectedRoute>
+   
+    </>
   ),
 });
 
-function CoachesPage() {
+
+function OverviewsPage() {
   const { lang } = useLanguage();
 
   return (

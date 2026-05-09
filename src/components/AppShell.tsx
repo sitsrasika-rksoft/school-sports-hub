@@ -51,7 +51,7 @@ const baseNavEn: NavItem[] = [
     label: "Coaches & Staff",
     icon: UserCheck,
     children: [
-      { to: "/pages/coaches", label: "Overview" },
+      { to: "/pages/coaches/overviews", label: "Overview" },
       { to: "/pages/coaches/directory", label: "Coach Directory" },
       { to: "/pages/coaches/certifications", label: "Certifications" },
       { to: "/pages/coaches/assignments", label: "Athlete Assignment" },
@@ -62,7 +62,16 @@ const baseNavEn: NavItem[] = [
   { to: "/pages/performance", label: "Performance & KPIs", icon: BarChart3 },
   { to: "/pages/facilities", label: "Facilities", icon: Building },
   { to: "/pages/health", label: "Health & Fitness", icon: HeartPulse },
-  { to: "/pages/reports", label: "Reports", icon: FileText },
+  {
+    to: "/pages/reports",
+    label: "Reports",
+    icon: FileText,
+    children: [
+      { to: "/pages/reports/coaches", label: "Coaches Reports" },
+      { to: "/pages/reports/players", label: "Players Reports" },
+    ],
+  },
+
 ];
 
 const baseNavSi: NavItem[] = [
@@ -75,7 +84,7 @@ const baseNavSi: NavItem[] = [
     label: "පුහුණුකරුවන් සහ කාර්ය මණ්ඩලය",
     icon: UserCheck,
     children: [
-      { to: "/pages/coaches", label: "සාරාංශය" },
+      { to: "/pages/coaches/overviews", label: "සාරාංශය" },
       { to: "/pages/coaches/directory", label: "පුහුණුකරුවන්ගේ නාමාවලිය" },
       { to: "/pages/coaches/certifications", label: "සහතික සහ සම්මාන" },
       { to: "/pages/coaches/assignments", label: "ක්‍රීඩක වෙන්කිරීම්" },
@@ -86,7 +95,16 @@ const baseNavSi: NavItem[] = [
   { to: "/pages/performance", label: "කාර්යසාධන දර්ශක", icon: BarChart3 },
   { to: "/pages/facilities", label: "පහසුකම්", icon: Building },
   { to: "/pages/health", label: "සෞඛ්‍ය සහ ශාරීරික හැසිරීම්", icon: HeartPulse },
-  { to: "/pages/reports", label: "වාර්තා", icon: FileText },
+  {
+    to: "/pages/reports",
+    label: "වාර්තා",
+    icon: FileText,
+    children: [
+      { to: "/pages/reports/coaches", label: "පුහුණුකරුවන්ගේ වාර්තා" },
+      { to: "/pages/reports/players", label: "ක්‍රීඩකයින්ගේ වාර්තා" },
+    ],
+  },
+
 ];
 
 /* ------------------------------------------------------------------ */

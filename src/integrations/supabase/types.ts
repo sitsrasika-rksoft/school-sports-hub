@@ -238,6 +238,75 @@ export type Database = {
           },
         ]
       }
+      coaches: {
+        Row: {
+          id: string
+          full_name: string
+          email: string | null
+          phone: string | null
+          specialization: string | null
+          hired_at: string | null
+          created_at: string
+          date_of_birth: string | null
+          role: string | null
+          sport: string | null
+          profile_image_key: string | null
+          address: string | null
+          experience: string | null
+          ranking: string | null
+          since_year: number | null
+          achievements: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          id: string
+          full_name: string
+          email?: string | null
+          phone?: string | null
+          specialization?: string | null
+          hired_at?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          role?: string | null
+          sport?: string | null
+          profile_image_key?: string | null
+          address?: string | null
+          experience?: string | null
+          ranking?: string | null
+          since_year?: number | null
+          achievements?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          full_name?: string
+          email?: string | null
+          phone?: string | null
+          specialization?: string | null
+          hired_at?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          role?: string | null
+          sport?: string | null
+          profile_image_key?: string | null
+          address?: string | null
+          experience?: string | null
+          ranking?: string | null
+          since_year?: number | null
+          achievements?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coaches_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+
       user_roles: {
         Row: {
           created_at: string
