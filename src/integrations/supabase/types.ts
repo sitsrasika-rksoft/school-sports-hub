@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      coaches: {
+        Row: {
+          achievements: string[] | null
+          address: string | null
+          created_at: string
+          created_by: string | null
+          date_of_birth: string | null
+          email: string | null
+          experience: string | null
+          full_name: string
+          hired_at: string | null
+          id: string
+          phone: string | null
+          profile_image_key: string | null
+          ranking: string | null
+          role: string | null
+          since_year: number | null
+          specialization: string | null
+          sport: string | null
+          updated_at: string
+        }
+        Insert: {
+          achievements?: string[] | null
+          address?: string | null
+          created_at?: string
+          created_by?: string | null
+          date_of_birth?: string | null
+          email?: string | null
+          experience?: string | null
+          full_name: string
+          hired_at?: string | null
+          id?: string
+          phone?: string | null
+          profile_image_key?: string | null
+          ranking?: string | null
+          role?: string | null
+          since_year?: number | null
+          specialization?: string | null
+          sport?: string | null
+          updated_at?: string
+        }
+        Update: {
+          achievements?: string[] | null
+          address?: string | null
+          created_at?: string
+          created_by?: string | null
+          date_of_birth?: string | null
+          email?: string | null
+          experience?: string | null
+          full_name?: string
+          hired_at?: string | null
+          id?: string
+          phone?: string | null
+          profile_image_key?: string | null
+          ranking?: string | null
+          role?: string | null
+          since_year?: number | null
+          specialization?: string | null
+          sport?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -161,6 +224,7 @@ export type Database = {
           id: string
           mission: string | null
           name: string
+          sport_code: string | null
           updated_at: string
           vision: string | null
         }
@@ -172,6 +236,7 @@ export type Database = {
           id?: string
           mission?: string | null
           name: string
+          sport_code?: string | null
           updated_at?: string
           vision?: string | null
         }
@@ -183,6 +248,7 @@ export type Database = {
           id?: string
           mission?: string | null
           name?: string
+          sport_code?: string | null
           updated_at?: string
           vision?: string | null
         }
