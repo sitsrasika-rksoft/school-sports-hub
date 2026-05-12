@@ -14,69 +14,6 @@ export type Database = {
   }
   public: {
     Tables: {
-      coaches: {
-        Row: {
-          achievements: string[] | null
-          address: string | null
-          created_at: string
-          created_by: string | null
-          date_of_birth: string | null
-          email: string | null
-          experience: string | null
-          full_name: string
-          hired_at: string | null
-          id: string
-          phone: string | null
-          profile_image_key: string | null
-          ranking: string | null
-          role: string | null
-          since_year: number | null
-          specialization: string | null
-          sport: string | null
-          updated_at: string
-        }
-        Insert: {
-          achievements?: string[] | null
-          address?: string | null
-          created_at?: string
-          created_by?: string | null
-          date_of_birth?: string | null
-          email?: string | null
-          experience?: string | null
-          full_name: string
-          hired_at?: string | null
-          id?: string
-          phone?: string | null
-          profile_image_key?: string | null
-          ranking?: string | null
-          role?: string | null
-          since_year?: number | null
-          specialization?: string | null
-          sport?: string | null
-          updated_at?: string
-        }
-        Update: {
-          achievements?: string[] | null
-          address?: string | null
-          created_at?: string
-          created_by?: string | null
-          date_of_birth?: string | null
-          email?: string | null
-          experience?: string | null
-          full_name?: string
-          hired_at?: string | null
-          id?: string
-          phone?: string | null
-          profile_image_key?: string | null
-          ranking?: string | null
-          role?: string | null
-          since_year?: number | null
-          specialization?: string | null
-          sport?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -224,9 +161,9 @@ export type Database = {
           id: string
           mission: string | null
           name: string
-          sport_code: string | null
           updated_at: string
           vision: string | null
+          sport_code: string | null
         }
         Insert: {
           cover_url?: string | null
@@ -236,9 +173,9 @@ export type Database = {
           id?: string
           mission?: string | null
           name: string
-          sport_code?: string | null
           updated_at?: string
           vision?: string | null
+          sport_code?: string | null
         }
         Update: {
           cover_url?: string | null
@@ -248,9 +185,9 @@ export type Database = {
           id?: string
           mission?: string | null
           name?: string
-          sport_code?: string | null
           updated_at?: string
           vision?: string | null
+          sport_code?: string | null
         }
         Relationships: []
       }
@@ -301,6 +238,75 @@ export type Database = {
           },
         ]
       }
+      coaches: {
+        Row: {
+          id: string
+          full_name: string
+          email: string | null
+          phone: string | null
+          specialization: string | null
+          hired_at: string | null
+          created_at: string
+          date_of_birth: string | null
+          role: string | null
+          sport: string | null
+          profile_image_key: string | null
+          address: string | null
+          experience: string | null
+          ranking: string | null
+          since_year: number | null
+          achievements: string[] | null
+          updated_at: string | null
+        }
+        Insert: {
+          id: string
+          full_name: string
+          email?: string | null
+          phone?: string | null
+          specialization?: string | null
+          hired_at?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          role?: string | null
+          sport?: string | null
+          profile_image_key?: string | null
+          address?: string | null
+          experience?: string | null
+          ranking?: string | null
+          since_year?: number | null
+          achievements?: string[] | null
+          updated_at?: string | null
+        }
+        Update: {
+          id?: string
+          full_name?: string
+          email?: string | null
+          phone?: string | null
+          specialization?: string | null
+          hired_at?: string | null
+          created_at?: string
+          date_of_birth?: string | null
+          role?: string | null
+          sport?: string | null
+          profile_image_key?: string | null
+          address?: string | null
+          experience?: string | null
+          ranking?: string | null
+          since_year?: number | null
+          achievements?: string[] | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "coaches_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+
       user_roles: {
         Row: {
           created_at: string
